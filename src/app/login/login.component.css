@@ -1,0 +1,21 @@
+/* app/styles.css */
+
+.login-card {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.custom-form { 
+  display: flex; /* Ajusta el formulario para que se muestre en una sola columna */
+  flex-direction: column;
+}
+.login-button {
+  background-color: #ffccd5; 
+  color: black; /* Cambia el color del texto por si es necesario */
+}
+.login-toolbar {
+  background-color: white; /* Fondo blanco */
+  color: black; /* Texto en negro */
+}
+

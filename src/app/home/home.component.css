@@ -1,0 +1,25 @@
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-button {
+  background-color: #ff4081;
+  color: white;
+  font-size: 16px;
+  width: 150px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clickable-row:hover {
+  background-color: #efefef;
+  cursor: pointer;
+}
+
+.clickable-row {
+  transition: background-color 0.3s;
+}

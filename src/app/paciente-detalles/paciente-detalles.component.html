@@ -1,0 +1,124 @@
+<div *ngIf="paciente" class="detalle-paciente">
+<fieldset class="titulo">
+    <legend>Detalles del paciente</legend>
+<div class="detalle-item">
+    <label>DNI: </label>
+    <span>{{ paciente.dni }}</span>
+</div>
+<div class="detalle-item">
+    <label>Nombre: </label>
+    <span>{{ paciente.nombre }}</span>
+</div>
+<div class="detalle-item">
+    <label>Edad: </label>
+    <span>{{ paciente.edad }}</span>
+</div>
+<div class="detalle-item">
+    <label>Cita: </label>
+    <span>{{ paciente.cita }}</span>
+</div>
+</fieldset>
+
+<div class="center-container">
+    <button mat-icon-button
+            title="Editar paciente"
+            routerLink="/paciente/create/{{paciente.id}}">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <input type="file" #imageInput style="display: none;" (change)="uploadImage($event)" accept="image/*"/>
+    <button mat-icon-button title="Subir imagen" (click)="imageInput.click()">
+      <mat-icon>file_upload</mat-icon>
+    </button>
+  </div>
+</div>
+
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-table" matSort>
+  
+    <ng-container matColumnDef="see">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let image">
+        <button name="view" mat-icon-button (click)="goToImage(image.id)">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="visibility"></mat-icon>
+      </button>
+      </td>
+    </ng-container>
+
+    <!-- Image name Column -->
+    <ng-container matColumnDef="icon">
+      <th mat-header-cell *matHeaderCellDef> Imagen </th>
+      <td mat-cell *matCellDef="let image"> 
+        <!--<img [src]="image.path" alt="Imagen del paciente" class="thumbnail-image"> -->
+        {{image.nombre.split('.')[0]}}
+      </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let image"> 
+        Informe del {{image.fecha.split('T')[0]}}
+      </td>
+    </ng-container>
+
+    <!-- Delete Button Column -->
+    <ng-container matColumnDef="deleteButton">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let image"> 
+        <button mat-icon-button title="Borrar paciente" (click)="confirmDeletion($event, image.id)">
+          <mat-icon color="warn">delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expand">
+      <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="expand row" (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()">
+          @if (expandedElement === element) {
+            <mat-icon>keyboard_arrow_up</mat-icon>
+          } @else {
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          }
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let image" [attr.colspan]="columnsToDisplayWithExpand.length">
+        <div class="example-element-detail"
+             [@detailExpand]="image == expandedElement ? 'expanded' : 'collapsed'">
+          <div class="example-element-diagram">
+            <img [src]="image.path" alt="Imagen del paciente" class="thumbnail-image" [routerLink]="['/image-detail', image.id]">
+          </div>
+          <div class="example-element-description">
+            Esta imagen se subío en la fecha {{image.fecha.split('T')[0]}} y el nombre del fichero es {{image.nombre}}
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Define the columns to display -->
+    <!--<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row class="clickable-row" 
+        *matRowDef="let row; columns: displayedColumns;"
+        [routerLink]="['/image-detail', row.id]"></tr>-->
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;"
+    class="example-element-row"
+    [class.example-expanded-row]="expandedElement === element"
+    (click)="$event.stopPropagation(); expandedElement = expandedElement === element ? null : element">
+    </tr>
+
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" 
+                 showFirstLastButtons 
+                 aria-label="Select page of images">
+  </mat-paginator>
+</div>

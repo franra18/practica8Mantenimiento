@@ -1,0 +1,19 @@
+<mat-card class="login-card">
+  <mat-toolbar class="login-toolbar">Login</mat-toolbar>
+    <form class="custom-form" method="post">
+    
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="nombre" name="nombre" required>
+    </mat-form-field>
+    
+
+    <mat-form-field appearance="fill">
+      <mat-label>DNI</mat-label>
+      <input matInput type="password" [(ngModel)]="dni" name="DNI" required>
+    </mat-form-field>
+    
+    <button name="login" mat-raised-button class="login-button" (click)="login()">Log in</button>
+
+  </form>
+</mat-card>

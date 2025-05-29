@@ -1,0 +1,48 @@
+<div class="image-detail-container">
+    <div class="image-container">
+        <h1>Paciente: {{ image.paciente.nombre }}</h1>
+        <img [src]="image.path" alt="Selected Image" />
+        <button mat-raised-button title="Volver al paciente" routerLink="/paciente/{{ image.paciente.id }}" 
+            class="add-button">
+                Volver al paciente
+            </button>
+    </div>
+
+
+
+    <div class="info-container">
+        <div *ngIf="!isInforme">
+            <h1>Crear informe</h1>
+            <button name="add" mat-raised-button title="Añadir informe" routerLink="/informe/create/{{ image.id }}" 
+            class="add-button">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div class="center-content">
+            <button name="predict" mat-raised-button *ngIf="!predicted" (click)="predict()" class="predict-button">Predecir</button>
+        </div>
+    
+        <div *ngIf="predicted" class="center-content result">
+            <span name="predict" style="font-weight: bold;">Probabilidad de cáncer: {{ prediction }}</span> 
+        </div>
+        
+        <div *ngIf="isInforme">
+            <h1 class="underline">Informe de la imagen</h1>
+            <div class="info-item">
+                <span class = "info-label"> Creado el: </span>
+            <span class="info-value">{{ image.fecha.split('T')[0] }}</span>
+            </div>
+            
+            <div class="info-item">
+                <span class="info-label">El resultado de la predicción ha sido: </span>
+                <br>
+                <span class="info-value">{{ informe.prediccion}}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">El médico ha anotado: </span>
+                <br>
+                <span name="content" class="info-value">{{ informe.contenido}}</span>
+            </div>
+        </div>
+    </div>
+</div>

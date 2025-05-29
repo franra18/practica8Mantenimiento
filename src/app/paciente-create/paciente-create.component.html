@@ -1,0 +1,39 @@
+<div class="container">
+    <mat-card>
+        <mat-card-title>
+            <div *ngIf="create">Añadir un nuevo paciente</div>
+            <div *ngIf="!create">Editar paciente {{paciente.id}}</div>
+        </mat-card-title>
+        
+        <form class="create-model-form" #form="ngForm" (ngSubmit)="onSubmit(form.value)" autocomplete="off">
+            <mat-form-field *ngIf="!create" class="full-width">
+                <input matInput type="number"  disabled name="id" [(ngModel)]="paciente.id">
+            </mat-form-field>
+            <br>
+            <mat-form-field  class="full-width">
+                <input matInput type="text"  autofocus required placeholder="DNI"  name="dni" [(ngModel)]="paciente.dni">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+                <input matInput type="text"  autofocus required placeholder="Nombre"  name="nombre" [(ngModel)]="paciente.nombre">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+                <input matInput type="number"  autofocus placeholder="Edad"  name="edad" [(ngModel)]="paciente.edad">
+            </mat-form-field>
+            <br>
+            <mat-form-field class="full-width">
+                <input matInput type="text"  autofocus placeholder="Cita"  name="cita" [(ngModel)]="paciente.cita">
+            </mat-form-field>
+            <br>
+            <div class="row-buttons">
+                <span class="spacer"></span>
+                <a (click)="back()" class="form-btn" mat-button>Go Back</a>
+                <button type="submit" class="form-btn" [disabled]="form.invalid" mat-raised-button color="accent">
+                <div *ngIf="create">Create</div>
+                <div *ngIf="!create">Edit</div>
+                </button>
+            </div>          
+        </form> 
+    </mat-card>
+</div>

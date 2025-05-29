@@ -1,0 +1,112 @@
+.titulo {
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.detalle-paciente {
+    padding: 20px;
+    max-width: 400px;
+    margin: auto;
+}
+
+.detalle-item {
+    margin-bottom: 10px;
+}
+
+.detalle-item label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.detalle-item span {
+    color: #555;
+}
+
+.cargando {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-grid .image-item {
+  display: inline-block;
+  margin: 5px;
+}
+
+.thumbnail-image {
+  width: 100px; 
+  height: 100px; 
+  object-fit: cover; 
+}
+
+.list-item-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.icon-container, .text-container, .button-container {
+  margin-right: 8px;
+}
+
+.button-container {
+  margin-left: auto; /* Mueve el contenedor del botón al final de la línea */
+}
+
+.clickable-row:hover {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.clickable-row {
+  transition: background-color 0.3s;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+.example-element-row {
+  transition: background-color 0.3s;
+}
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+  cursor: pointer;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
