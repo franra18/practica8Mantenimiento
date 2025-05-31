@@ -25,17 +25,21 @@ export default async function () {
 
         await page.locator('input[name="nombre"]').clear()
         await page.locator('input[name="DNI"]').clear()
-        await page.locator('input[name="nombre"]').type('Pepito');
-        await page.locator('input[name="DNI"]').type('12345678M');
+        await page.locator('input[name="nombre"]').type('Manuel');
+        await page.locator('input[name="DNI"]').type('123');
 
-        // Nos vamos a la pagina central
+        // Nos vamos a la página principal
         const loginButton = page.locator('button[name="login"]');
 
         await Promise.all([page.waitForNavigation(), loginButton.click()]);
-        sleep(5);
+        sleep(2);
+
+        await check(page, {
+            'está en la página principal después de iniciar sesión': () => page.url().includes('/home'),
+        });
 
         await check(page.locator('h2'), {
-            header: async (lo) => (await lo.textContent()) == 'Listado de pacientes',
+            encabezado: async (lo) => (await lo.textContent()) == 'Listado de pacientes',
         });
 
     } finally {
